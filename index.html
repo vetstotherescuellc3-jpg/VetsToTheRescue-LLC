@@ -177,42 +177,28 @@
     </div>
     <div class="border-t border-slate-800 py-4 text-center text-xs text-slate-400">© <span id="year"></span> VetsToTheRescue LLC. All rights reserved.</div>
   </footer>
+  <script>
+  // ---- Footer year ----
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ---- Footer year ----
-    document.getElementById('year').textContent = new Date().getFullYear();
+  // ---- Contact form success handling + auto reset ----
+  const form = document.getElementById('contact-form');
+  const thanks = document.getElementById('thanks');
 
-    // ---- Contact form success handling + auto reset ----
-    const form = document.getElementById('contact-form');
-    const thanks = document.getElementById('thanks');
-    if(form){
-      form.addEventListener('submit', function(){
-        // Switch to thank you view immediately; Formspree will still post
-        if(thanks){
-          form.classList.add('hidden');
-          thanks.classList.remove('hidden');
-          setTimeout(()=>{
-            form.reset();
-            thanks.classList.add('hidden');
-            form.classList.remove('hidden');
-          }, 7000);
-        }
-      });
-    }
+  if (form) {
+    form.addEventListener('submit', function () {
+      if (thanks) {
+        form.classList.add('hidden');
+        thanks.classList.remove('hidden');
 
-    // ---- Simple console tests (sanity checks) ----
-    (function runTests(){
-      const tests = [
-        {name:'Quarter load, no extras', args:{tier:'quarter', mattresses:0,tvs:0,paint:0,stairs:false,heavy:false}, expect:200},
-        {name:'Half load + 1 mattress + stairs', args:{tier:'half', mattresses:1,tvs:0,paint:0,stairs:true,heavy:false}, expect:380},
-        {name:'Full load + 2 TVs + heavy', args:{tier:'full', mattresses:0,tvs:2,paint:0,stairs:false,heavy:true}, expect:715},
-        {name:'⅛ load + 1 paint + 1 mattress', args:{tier:'eighth', mattresses:1,tvs:0,paint:1,stairs:false,heavy:false}, expect:175},
-        // Additional coverage
-        {name:'¾ load baseline', args:{tier:'threeq', mattresses:0,tvs:0,paint:0,stairs:false,heavy:false}, expect:440},
-        {name:'¼ + stairs + heavy + 2 paint', args:{tier:'quarter', mattresses:0,tvs:0,paint:2,stairs:true,heavy:true}, expect:200+80+40+75}
-      ];
-      let pass=0; tests.forEach(t=>{ const got=estimate(t.args); const ok=got===t.expect; pass+=ok?1:0; console.log(`[Estimator Test] ${ok?'PASS':'FAIL'} - ${t.name} → got ${got}, expect ${t.expect}`); });
-      console.log(`[Estimator Test] ${pass}/${tests.length} tests passed`);
-    })();
-  </script>
+        setTimeout(() => {
+          form.reset();
+          thanks.classList.add('hidden');
+          form.classList.remove('hidden');
+        }, 7000);
+      }
+    });
+  }
+</script>
 </body>
 </html>
