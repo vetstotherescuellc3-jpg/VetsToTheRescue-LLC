@@ -201,9 +201,37 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function copyShareLink(url, messageElementId) {
+    if (!navigator.clipboard) {
+      // Fallback: open prompt if clipboard API not available
+      window.prompt('Copy this link:', url);
+      return;
+    }
+    navigator.clipboard.writeText(url)
+      .then(function () {
+        const el = document.getElementById(messageElementId);
+        if (el) {
+          el.textContent = 'Link copied! Open Instagram and paste it into your post or story.';
+          setTimeout(function () {
+            el.textContent = '';
+          }, 3000);
+        }
+      })
+      .catch(function () {
+        const el = document.getElementById(messageElementId);
+        if (el) {
+          el.textContent = 'Could not copy link. You can still share by copying it from the address bar.';
+          setTimeout(function () {
+            el.textContent = '';
+          }, 4000);
+        }
+      });
+  }
+</script>
 </body>
 </html>
+
 
