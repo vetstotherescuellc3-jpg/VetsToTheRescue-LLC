@@ -91,6 +91,13 @@
     .reveal-visible{opacity:1; transform:translateY(0);}
   </style>
   <style>
+
+    /* Active nav highlight */
+.navActive{
+  color: var(--gold) !important;
+  text-shadow: 0 0 18px rgba(246,196,83,.35);
+}
+
 /* =========================
    FULL-BLEED HERO BACKGROUND
    ========================= */
@@ -255,6 +262,12 @@ header.siteHeader {
 
       <nav class="hidden md:flex items-center gap-6">
         <a href="#services" data-nav="services" class="text-sm hover:opacity-90" style="color:var(--muted)">Services</a>
+        <a href="/index.html#service-area"
+          id="nav-service-area"
+          class="text-sm hover:opacity-90 transition"
+          style="color:var(--muted)">
+          📍 Service Area
+        </a>
         <a href="#about" data-nav="about" class="text-sm hover:opacity-90" style="color:var(--muted)">About</a>
         <a href="/blog.html" class="text-sm hover:opacity-90" style="color:var(--muted)">Blog</a>
         <a href="#contact" data-nav="contact" class="text-sm hover:opacity-90" style="color:var(--muted)">Contact</a>
@@ -283,7 +296,7 @@ header.siteHeader {
       </h1>
 
       <p class="mt-4 text-lg md:text-xl" style="color:var(--muted)">
-        Mission-driven junk removal & hauling with fast scheduling, fair pricing, and pro crews across Denver, Aurora, Castle Rock, and beyond.
+        Fast, professional junk removal by a veteran-owned team — fair pricing and quick scheduling.
       </p>
 
       <div class="mt-7 flex flex-wrap gap-3">
@@ -413,6 +426,77 @@ header.siteHeader {
 
   </section>
 
+<!-- Service Area -->
+<section id="service-area" class="max-w-7xl mx-auto px-4 py-16 reveal">
+  <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+    <div>
+      <h2 class="text-3xl font-black tracking-tight">Service Area</h2>
+      <p class="mt-2" style="color:var(--muted)">
+        We cover the Denver metro and surrounding Front Range communities. Not sure if you’re in range? Call/text us.
+      </p>
+    </div>
+    <a href="tel:+1-720-383-7488" class="inline-flex items-center gap-2 rounded-2xl px-5 py-3 btnPrimary font-extrabold">
+      📞 Call (720) 383-7488
+    </a>
+  </div>
+
+  <div class="mt-8 grid lg:grid-cols-[1.5fr_1fr] gap-6 items-stretch">
+    <!-- Map -->
+    <div class="rounded-2xl glass overflow-hidden cardShadow">
+      <div class="p-4 border-b" style="border-color:var(--line)">
+        <p class="text-sm font-extrabold" style="color:var(--gold)">Interactive map</p>
+        <p class="text-xs mt-1" style="color:var(--muted)">Pinch/zoom and tap “Directions”.</p>
+      </div>
+
+      <!-- Replace the src URL with your preferred map (see notes below) -->
+      <iframe
+        title="VetsToTheRescue Service Area Map"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        class="w-full"
+        style="height:420px"
+        src="https://www.google.com/maps?q=Denver,+CO&z=9&output=embed">
+      </iframe>
+
+      <div class="p-4">
+        <p class="text-xs" style="color:rgba(243,246,255,.55)">
+          Tip: If you’re just outside the shaded area, we may still be able to help depending on load size and schedule.
+        </p>
+      </div>
+    </div>
+
+    <!-- Coverage list -->
+    <div class="rounded-2xl glass p-6 cardShadow">
+      <h3 class="text-xl font-extrabold">Common Service Areas</h3>
+      <p class="mt-2 text-sm" style="color:var(--muted)">
+        These are popular stops — we also serve many nearby neighborhoods.
+      </p>
+
+      <div class="mt-5 grid grid-cols-2 gap-2 text-sm">
+        <div class="rounded-xl px-3 py-2" style="background:rgba(255,255,255,.05); border:1px solid var(--line);">Denver</div>
+        <div class="rounded-xl px-3 py-2" style="background:rgba(255,255,255,.05); border:1px solid var(--line);">Aurora</div>
+        <div class="rounded-xl px-3 py-2" style="background:rgba(255,255,255,.05); border:1px solid var(--line);">Castle Rock</div>
+        <div class="rounded-xl px-3 py-2" style="background:rgba(255,255,255,.05); border:1px solid var(--line);">Centennial</div>
+        <div class="rounded-xl px-3 py-2" style="background:rgba(255,255,255,.05); border:1px solid var(--line);">Parker</div>
+        <div class="rounded-xl px-3 py-2" style="background:rgba(255,255,255,.05); border:1px solid var(--line);">Littleton</div>
+        <div class="rounded-xl px-3 py-2" style="background:rgba(255,255,255,.05); border:1px solid var(--line);">Highlands Ranch</div>
+        <div class="rounded-xl px-3 py-2" style="background:rgba(255,255,255,.05); border:1px solid var(--line);">Thornton</div>
+      </div>
+
+      <div class="mt-6 rounded-2xl p-4" style="background:rgba(246,196,83,.10); border:1px solid rgba(246,196,83,.25);">
+        <p class="text-sm font-extrabold" style="color:var(--gold)">Outside these cities?</p>
+        <p class="text-sm mt-1" style="color:var(--muted)">
+          Text us your address and we’ll confirm availability.
+        </p>
+        <a href="sms:+17203837488" class="mt-3 inline-flex rounded-2xl px-4 py-2 btnDark font-semibold">
+          📲 Text Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
   <!-- About -->
   <section id="about" class="max-w-7xl mx-auto px-4 py-16 reveal">
     <div class="grid md:grid-cols-2 gap-10 items-center">
@@ -637,6 +721,27 @@ header.siteHeader {
         if (el) navObserver.observe(el);
       });
     }
+    
+      // Service Area nav auto-highlight
+  const serviceAreaSection = document.getElementById('service-area');
+  const serviceAreaNav = document.getElementById('nav-service-area');
+  if (serviceAreaSection && serviceAreaNav && 'IntersectionObserver' in window) {
+    const serviceObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            serviceAreaNav.classList.add('navActive');
+          } else {
+            serviceAreaNav.classList.remove('navActive');
+          }
+        });
+      },
+      {
+        rootMargin: '-40% 0px -40% 0px'
+      }
+    );
+    serviceObserver.observe(serviceAreaSection);
+  }
   </script>
 
   <!-- ZIP -> City/State autofill (same logic as your original) -->
@@ -645,9 +750,7 @@ header.siteHeader {
       const zipEl = document.getElementById("zip");
       const cityEl = document.getElementById("city_state");
       if (!zipEl || !cityEl) return;
-
       let lastZip = "";
-
       async function zipToCityState(zip) {
         const res = await fetch(`https://api.zippopotam.us/us/${zip}`);
         if (!res.ok) throw new Error("ZIP not found");
@@ -656,11 +759,9 @@ header.siteHeader {
         if (!p) throw new Error("No place data");
         return `${p["place name"]}, ${p["state abbreviation"]}`;
       }
-
       zipEl.addEventListener("input", async () => {
         const zip = zipEl.value.replace(/\\D/g, "").slice(0, 5);
         zipEl.value = zip;
-
         if (zip.length !== 5) {
           cityEl.value = "";
           lastZip = "";
@@ -668,7 +769,6 @@ header.siteHeader {
         }
         if (zip === lastZip) return;
         lastZip = zip;
-
         try {
           cityEl.value = "Looking up…";
           const cityState = await zipToCityState(zip);
