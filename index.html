@@ -161,6 +161,30 @@
     }
 </style>
   <style>
+
+    /* Logo: attached to sticky nav, but hangs down */
+.logoHang{
+  position:absolute;      /* relative to the header container */
+  left:16px;
+  top:50%;                /* anchors to the nav bar vertically */
+  transform: translateY(-50%) translateY(18px); /* and hangs down */
+  z-index:80;
+}
+
+.logoHang img{
+  width:92px;             /* bigger but not insane */
+  height:auto;
+  filter:
+    drop-shadow(0 12px 34px rgba(0,0,0,.70))
+    drop-shadow(0 0 16px rgba(246,196,83,.30));
+}
+
+/* Mobile tweak */
+@media (max-width:640px){
+  .logoHang img{ width:70px; }
+  .logoHang{ transform: translateY(-50%) translateY(12px); left:12px; }
+}
+
 /* =========================
    FULL-BLEED HERO BACKGROUND
    ========================= */
@@ -341,6 +365,9 @@ header { position: relative; }
   <!-- Header -->
   <header class="siteHeader">
     <div class="max-w-7xl mx-auto px-4 py-3 relative">
+      <a href="/index.html" class="logoHang" aria-label="Home">
+        <img src="/V2R_LOGO3.0.png" alt="VetsToTheRescue logo">
+      </a>
 
       <!-- Hanging logo (top-left) -->
       <a href="/index.html" class="brandHang" aria-label="VetsToTheRescue home">
