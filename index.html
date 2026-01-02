@@ -103,6 +103,46 @@ header.siteHeader {
   background: rgba(5,7,13,.28);
   backdrop-filter: blur(14px);
 }
+    
+    /* Hanging logo (top-left) */
+header { position: relative; }
+
+.brandHang{
+  position: absolute;
+  left: 18px;
+  top: 10px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(14px); /* makes it "hang" below the bar */
+}
+
+.brandHangImg{
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 18px;
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow:
+    0 18px 55px rgba(0,0,0,.65),
+    0 0 0 6px rgba(246,196,83,.10); /* subtle gold halo */
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.brandHangImg:hover{
+  transform: scale(1.05);
+  box-shadow:
+    0 22px 70px rgba(0,0,0,.75),
+    0 0 0 7px rgba(246,196,83,.18);
+}
+
+/* Mobile: slightly smaller so it doesn't crowd */
+@media (max-width: 640px){
+  .brandHang{ left: 12px; top: 8px; transform: translateY(10px); }
+  .brandHangImg{ width: 56px; height: 56px; border-radius: 16px; }
+}
 
 /* HERO now uses truck image as background */
 .heroWrap{
@@ -254,13 +294,6 @@ header.siteHeader {
 <section class="heroWrap">
   <div class="embers"></div>
 
-  <div class="max-w-7xl mx-auto px-4 py-16 md:py-20 relative z-10">
-    <div class="max-w-2xl heroCard p-6 md:p-8 reveal">
-      <div class="inline-flex items-center gap-2 rounded-full px-4 py-2 glass text-xs font-semibold">
-        <span class="inline-block h-2 w-2 rounded-full" style="background:var(--gold)"></span>
-        <span style="color:var(--muted)">Veteran-Owned • Colorado</span>
-      </div>
-
       <!-- BIG SLOGAN -->
       <h1 class="mt-5 text-5xl md:text-7xl bigSlogan">
         Got a problem?<br/>
@@ -283,18 +316,7 @@ header.siteHeader {
           <div class="flex items-center gap-2">🏠 <span>Residential</span></div>
           <div class="flex items-center gap-2">🏢 <span>Commercial</span></div>
         </div>
-
         <div class="mt-4 sparkLine"></div>
-
-        <div class="mt-4 flex items-center justify-between text-sm">
-          <div>
-            <span style="color:var(--muted)">Call / Text:</span>
-            <span class="font-extrabold"> (720) 383-7488</span>
-          </div>
-          <div class="hidden md:block" style="color:rgba(243,246,255,.6)">
-            Clean → Donate → Recycle → Landfill (last)
-          </div>
-        </div>
       </div>
     </div>
   </div>
