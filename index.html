@@ -89,10 +89,6 @@ html{scroll-behavior:smooth}
     /* Scroll reveal */
     .reveal{opacity:0; transform:translateY(22px); transition:opacity .6s ease-out,transform .6s ease-out;}
     .reveal-visible{opacity:1; transform:translateY(0);}
-  
-    /* Hanging header logo — badge style */
-
-
 
 /* Mobile: smaller badge so it doesn't crowd */
     @media (max-width:640px){
@@ -202,7 +198,7 @@ header { position: relative; }
     radial-gradient(circle at 20% 25%, rgba(246,196,83,.25), transparent 45%),
     radial-gradient(circle at 80% 15%, rgba(45,123,255,.18), transparent 45%),
     radial-gradient(circle at 70% 80%, rgba(255,59,48,.14), transparent 45%),
-    linear-gradient(180deg, rgba(5,7,13,.35), rgba(5,7,13,.86)),
+    linear-gradient(180deg, rgba(5,7,13,.18), rgba(5,7,13,.55)),
     url("/hero-truck.png");
 
   background-size: auto, auto, auto, cover, cover;
@@ -737,21 +733,55 @@ header { position: relative; }
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // Contact form success handling + auto reset (same behavior as your original)
-    const form = document.getElementById('contact-form');
-    const thanks = document.getElementById('thanks');
-    if (form) {
-      form.addEventListener('submit', function () {
-        if (thanks) {
-          form.classList.add('hidden');
-          thanks.classList.remove('hidden');
+<script>
+  // Footer year (safe)
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-          setTimeout(() => {
-            form.reset();
-            thanks.classList.add('hidden');
-            form.classList.remove('hidden');
-          }, 7000);
+  // Contact form submit (REAL success/failure handling)
+  const form = document.getElementById("contact-form");
+  const thanks = document.getElementById("thanks");
+
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending…";
+      }
+      try {
+        const response = await fetch(form.action, {
+          method: form.method || "POST",
+          body: new FormData(form),
+          headers: { "Accept": "application/json" }
+        });
+
+        if (!response.ok) throw new Error("Form submission failed");
+
+        // SUCCESS
+        form.classList.add("hidden");
+        if (thanks) thanks.classList.remove("hidden");
+
+        setTimeout(() => {
+          if (thanks) thanks.classList.add("hidden");
+          form.classList.remove("hidden");
+          form.reset();
+        }, 7000);
+
+      } catch (error) {
+        alert("The form didn’t send. Please call or text us at (720) 383-7488.");
+        console.error(error);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Send Request";
         }
-      });
+      }
+    });
+  }
+</script>
     }
 
     // Scroll reveal
