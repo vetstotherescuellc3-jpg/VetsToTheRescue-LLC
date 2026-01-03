@@ -3,180 +3,236 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clean → Donate → Recycle → Landfill (Last) | VetsToTheRescue</title>
+  <meta name="description" content="Our donation-first process: we clean and donate usable items to Denver Rescue Mission, recycle what we can, and landfill only as a last resort." />
 
-  <title>
-    Clean → Donate → Recycle → Landfill (Last) | What Makes Us Different
-  </title>
-
-  <meta name="description"
-        content="Learn how VetsToTheRescue cleans and donates usable furniture to Denver Rescue Mission, recycles responsibly, and landfills only as a last resort." />
-
-  <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    body{
-      font-family:Inter,ui-sans-serif,system-ui;
-      background:#05070D;
-      color:#F3F6FF;
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+    :root{
+      --bg0:#05070D;
+      --bg1:#070A12;
+      --panel:rgba(255,255,255,.06);
+      --line:rgba(255,255,255,.12);
+      --text:#F3F6FF;
+      --muted:rgba(243,246,255,.76);
+      --gold:#F6C453;
+      --gold2:#E7A51A;
     }
+    .glass{background:var(--panel); border:1px solid var(--line); backdrop-filter: blur(12px);}
+    .cardShadow{box-shadow:0 18px 50px rgba(0,0,0,.55)}
+    .btnPrimary{background:linear-gradient(135deg,var(--gold),var(--gold2)); color:#0B0D12; box-shadow:0 14px 32px rgba(246,196,83,.22);}
+    .btnDark{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); color:var(--text);}
+    .sparkLine{height:1px;background:linear-gradient(90deg,transparent,rgba(246,196,83,.65),rgba(255,255,255,.12),transparent);}
+    header.siteHeader{position:sticky; top:0; z-index:50; border-bottom:1px solid rgba(255,255,255,.10); background:rgba(5,7,13,.32); backdrop-filter: blur(14px);}
+    .hero{
+      position:relative; overflow:hidden;
+      background:
+        radial-gradient(circle at 18% 30%, rgba(246,196,83,.22), transparent 45%),
+        radial-gradient(circle at 78% 20%, rgba(45,123,255,.14), transparent 45%),
+        linear-gradient(180deg, rgba(5,7,13,.35), rgba(5,7,13,.85)),
+        url("/donation-first-hero.png");
+      background-size: auto, auto, cover, cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    }
+    .hero::before{
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(90deg, rgba(5,7,13,.78), rgba(5,7,13,.45), rgba(5,7,13,.68));
+      pointer-events:none;
+    }
+    .chip{border:1px solid rgba(246,196,83,.25); background:rgba(246,196,83,.12); color:var(--gold)}
   </style>
 </head>
 
-<body>
+<body style="background:linear-gradient(180deg,var(--bg0),var(--bg1)); color:var(--text);">
 
   <!-- Header -->
-  <header class="border-b border-white/10 bg-black/60 backdrop-blur sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-      <a href="/index.html" class="flex items-center gap-3">
-        <img src="/V2R_LOGO3.0.png" alt="VetsToTheRescue logo" class="h-10 w-auto rounded-lg bg-black/30 p-1 border border-white/10">
-        <div>
-          <p class="font-extrabold text-lg">VetsToTheRescue</p>
-          <p class="text-xs text-white/70">Junk Removal &amp; Hauling • Colorado</p>
+  <header class="siteHeader">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+      <!-- FIXED LOGO -->
+      <a href="/index.html" class="inline-flex items-center gap-3" aria-label="Home">
+        <img
+          src="/V2R_LOGO3.1.png"
+          alt="VetsToTheRescue logo"
+          width="44"
+          height="44"
+          style="border-radius:12px; background:rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.12); padding:6px;"
+        />
+        <div class="leading-tight">
+          <div class="font-extrabold">VetsToTheRescue</div>
+          <div class="text-xs" style="color:var(--muted)">Junk Removal &amp; Hauling • Colorado</div>
         </div>
       </a>
 
-      <a href="/index.html#contact"
-         class="rounded-xl px-5 py-2 bg-yellow-400 text-black font-extrabold">
-        Free Estimate
-      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm" style="color:var(--muted)">
+        <a href="/#services" class="hover:opacity-90">Services</a>
+        <a href="/#about" class="hover:opacity-90">About</a>
+        <a href="/blog.html" class="hover:opacity-90">Blog</a>
+        <a href="/#contact" class="hover:opacity-90">Contact</a>
+      </nav>
+
+      <a href="/#contact" class="rounded-2xl px-5 py-2 btnPrimary font-extrabold">Free Estimate</a>
     </div>
   </header>
 
-  <!-- Content -->
-  <main class="max-w-3xl mx-auto px-4 py-16">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="max-w-7xl mx-auto px-4 py-16 md:py-20 relative z-10">
+      <div class="max-w-3xl glass cardShadow rounded-[2rem] p-7 md:p-10">
+        <div class="inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-extrabold chip">
+          ⭐ WHAT MAKES US DIFFERENT
+        </div>
 
-    <p class="text-xs font-extrabold tracking-widest uppercase text-yellow-400">
-      What Makes Us Different
-    </p>
+        <h1 class="mt-5 text-4xl md:text-6xl font-black tracking-tight leading-[1.05]">
+          Clean → Donate → Recycle → <span style="color:var(--gold)">Landfill (Last)</span>
+        </h1>
 
-    <h1 class="mt-4 text-4xl md:text-5xl font-black leading-tight">
-      Clean → Donate → Recycle → Landfill (Last)
-    </h1>
+        <p class="mt-5 text-lg" style="color:var(--muted)">
+          Junk removal shouldn’t automatically mean “dump run.” We prioritize community impact and responsible disposal —
+          donating usable furniture to <span class="font-semibold" style="color:var(--text)">Denver Rescue Mission</span>,
+          recycling what we can, and using landfill only when there’s no better option.
+        </p>
 
-    <p class="mt-6 text-lg text-white/80">
-      Junk removal shouldn’t end at the landfill.
-      At VetsToTheRescue, we believe customers deserve to know exactly what happens
-      to their items once they’re hauled away.
-    </p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="/#contact" class="rounded-2xl px-6 py-3 btnPrimary font-extrabold">Get a Free Estimate</a>
+          <a href="tel:+1-720-383-7488" class="rounded-2xl px-6 py-3 btnDark font-semibold">Call (720) 383-7488</a>
+        </div>
 
-    <p class="mt-4 text-white/80">
-      Many companies take everything straight to the dump because it’s faster.
-      We take a more intentional approach—one that prioritizes reuse, community impact,
-      and responsible disposal.
-    </p>
+        <div class="mt-8 sparkLine"></div>
 
-    <hr class="my-10 border-white/15">
-
-    <h2 class="text-2xl font-black mt-10">
-      Step 1: Cleaning and Preparing Furniture for Donation
-    </h2>
-
-    <p class="mt-4 text-white/80">
-      When we remove furniture, the first question we ask is simple:
-      <strong>Can this item still help someone?</strong>
-    </p>
-
-    <p class="mt-4 text-white/80">
-      If an item is structurally sound and in usable condition, our team takes
-      the time to clean and prepare it properly. That means wiping down surfaces,
-      removing debris, and separating donation-ready pieces from items that
-      aren’t suitable.
-    </p>
-
-    <p class="mt-4 text-white/80">
-      This extra step ensures donated items are ready for immediate use—not dropped
-      off in a condition that creates more work for the organization receiving them.
-    </p>
-
-    <h2 class="text-2xl font-black mt-12">
-      Supporting the Denver Rescue Mission
-    </h2>
-
-    <p class="mt-4 text-white/80">
-      When furniture qualifies, we prioritize donating it to the
-      <strong>Denver Rescue Mission</strong>.
-      Their programs support individuals and families experiencing homelessness
-      through emergency shelter, recovery services, and transitional housing.
-    </p>
-
-    <p class="mt-4 text-white/80">
-      Donated furniture helps furnish living spaces where people are rebuilding
-      their lives. A couch, table, or bed frame that might have been discarded
-      instead becomes part of someone’s fresh start.
-    </p>
-
-    <h2 class="text-2xl font-black mt-12">
-      Step 2: Recycling What Can’t Be Donated
-    </h2>
-
-    <p class="mt-4 text-white/80">
-      Not every item can be donated—but that doesn’t mean it belongs in a landfill.
-      Whenever possible, we separate materials for recycling.
-    </p>
-
-    <p class="mt-4 text-white/80">
-      Common recyclable materials include metal, appliances, cardboard, electronics,
-      and certain wood components. Sorting and recycling these materials keeps
-      reusable resources in circulation and reduces unnecessary landfill waste.
-    </p>
-
-    <h2 class="text-2xl font-black mt-12">
-      Step 3: Landfill Is the Last Resort
-    </h2>
-
-    <p class="mt-4 text-white/80">
-      Only after an item cannot be donated or recycled do we take it to the landfill.
-      This step is intentional—not automatic.
-    </p>
-
-    <p class="mt-4 text-white/80">
-      Some items are damaged, contaminated, or unsafe to reuse.
-      When that’s the case, proper disposal is the responsible choice.
-      The key difference is that landfill use is minimized by design.
-    </p>
-
-    <h2 class="text-2xl font-black mt-12">
-      Why This Process Matters
-    </h2>
-
-    <p class="mt-4 text-white/80">
-      Junk removal decisions have real impact. When usable items are discarded,
-      communities lose resources and landfills fill faster.
-      A thoughtful process creates better outcomes for everyone.
-    </p>
-
-    <p class="mt-4 text-white/80">
-      Our approach reflects a belief in accountability, care, and doing the job right—
-      values that guide how we treat our customers, their belongings, and the community.
-    </p>
-
-    <div class="mt-12 p-8 rounded-2xl bg-white/5 border border-white/15">
-      <p class="text-xl font-black">
-        Got a problem? One call. It’s gone.
-      </p>
-      <p class="mt-2 text-white/80">
-        And when it’s gone, you can feel good knowing it was handled the right way.
-      </p>
-
-      <a href="/index.html#contact"
-         class="inline-block mt-5 px-6 py-3 rounded-xl bg-yellow-400 text-black font-extrabold">
-        Get a Free Estimate
-      </a>
+        <div class="mt-6 grid sm:grid-cols-3 gap-4 text-sm">
+          <div class="glass rounded-2xl p-4">
+            <div class="font-extrabold">Donation-first</div>
+            <div style="color:var(--muted)" class="mt-1">We actively separate usable items for donation.</div>
+          </div>
+          <div class="glass rounded-2xl p-4">
+            <div class="font-extrabold">Recycle responsibly</div>
+            <div style="color:var(--muted)" class="mt-1">Metal, cardboard, e-waste and more—handled right.</div>
+          </div>
+          <div class="glass rounded-2xl p-4">
+            <div class="font-extrabold">Landfill last</div>
+            <div style="color:var(--muted)" class="mt-1">Only what truly can’t be reused or recycled.</div>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
+  <!-- Steps -->
+  <main class="max-w-7xl mx-auto px-4 py-14">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-black tracking-tight">How it works</h2>
+      <p class="mt-2" style="color:var(--muted)">
+        This is our purpose, not a gimmick: protect your home, respect your items, and strengthen our community.
+      </p>
+
+      <div class="mt-8 space-y-5">
+        <!-- Step card -->
+        <div class="glass cardShadow rounded-[2rem] p-6 md:p-7">
+          <div class="text-xs font-extrabold" style="color:var(--gold)">STEP 1</div>
+          <h3 class="mt-2 text-xl md:text-2xl font-black">Clean &amp; prepare donation-ready items</h3>
+          <p class="mt-3" style="color:var(--muted)">
+            We ask one question first: <span class="font-semibold" style="color:var(--text)">Can this still help someone?</span>
+            If yes, we set it aside and keep it in respectable condition for donation.
+          </p>
+        </div>
+
+        <div class="glass cardShadow rounded-[2rem] p-6 md:p-7">
+          <div class="text-xs font-extrabold" style="color:var(--gold)">STEP 2</div>
+          <h3 class="mt-2 text-xl md:text-2xl font-black">Donate usable furniture to Denver Rescue Mission</h3>
+          <p class="mt-3" style="color:var(--muted)">
+            Whenever possible, we route usable items to organizations that support people in need — including
+            Denver Rescue Mission.
+          </p>
+        </div>
+
+        <div class="glass cardShadow rounded-[2rem] p-6 md:p-7">
+          <div class="text-xs font-extrabold" style="color:var(--gold)">STEP 3</div>
+          <h3 class="mt-2 text-xl md:text-2xl font-black">Recycle what we can</h3>
+          <p class="mt-3" style="color:var(--muted)">
+            Metals, cardboard, and other recyclables get separated so less ends up in the landfill.
+          </p>
+        </div>
+
+        <div class="glass cardShadow rounded-[2rem] p-6 md:p-7">
+          <div class="text-xs font-extrabold" style="color:var(--gold)">STEP 4</div>
+          <h3 class="mt-2 text-xl md:text-2xl font-black">Landfill only as a last resort</h3>
+          <p class="mt-3" style="color:var(--muted)">
+            Anything that truly can’t be reused or recycled is disposed of responsibly.
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA Block -->
+      <div class="mt-10 glass cardShadow rounded-[2rem] p-7 md:p-9">
+        <h3 class="text-2xl md:text-3xl font-black">Want the fastest quote?</h3>
+        <p class="mt-2" style="color:var(--muted)">Text a few photos and your ZIP code. We’ll reply with a ballpark estimate.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="sms:+17203837488" class="rounded-2xl px-6 py-3 btnPrimary font-extrabold">📲 Text Photos</a>
+          <a href="/#contact" class="rounded-2xl px-6 py-3 btnDark font-semibold">Use Estimate Form</a>
+          <a href="tel:+1-720-383-7488" class="rounded-2xl px-6 py-3 btnDark font-semibold">Call Now</a>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="mt-12">
+        <h2 class="text-3xl font-black tracking-tight">FAQ</h2>
+        <div class="mt-5 grid md:grid-cols-2 gap-5">
+          <div class="glass rounded-2xl p-6">
+            <div class="font-extrabold">Do you guarantee donation?</div>
+            <p class="mt-2 text-sm" style="color:var(--muted)">
+              We prioritize donation-first. Final acceptance depends on item condition and what donation partners can take.
+            </p>
+          </div>
+          <div class="glass rounded-2xl p-6">
+            <div class="font-extrabold">What items are best for donation?</div>
+            <p class="mt-2 text-sm" style="color:var(--muted)">
+              Clean, usable furniture and household goods in solid condition. If you’re unsure, send a photo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-white/10 py-8 text-center text-sm text-white/60">
-    © <span id="year"></span> VetsToTheRescue LLC. All rights reserved.
+  <footer style="background:#04060B; border-top:1px solid var(--line);">
+    <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
+      <div>
+        <p class="font-black text-lg">VetsToTheRescue</p>
+        <p class="text-sm mt-1" style="color:var(--muted)">Veteran-Owned Junk Removal • Denver Metro &amp; Front Range</p>
+      </div>
+      <div>
+        <p class="font-extrabold">Quick Links</p>
+        <ul class="mt-2 space-y-2 text-sm" style="color:var(--muted)">
+          <li><a href="/#services" class="hover:underline">Services</a></li>
+          <li><a href="/#about" class="hover:underline">About</a></li>
+          <li><a href="/blog.html" class="hover:underline">Blog</a></li>
+          <li><a href="/#contact" class="hover:underline">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-extrabold">Contact</p>
+        <ul class="mt-2 space-y-2 text-sm" style="color:var(--muted)">
+          <li>📞 <a href="tel:+1-720-383-7488" class="hover:underline">(720) 383-7488</a></li>
+          <li>✉️ <a href="mailto:inquiry@vetstotherescue.pro" class="hover:underline">inquiry@vetstotherescue.pro</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="py-4 text-center text-xs" style="color:rgba(243,246,255,.55); border-top:1px solid var(--line);">
+      © <span id="year"></span> VetsToTheRescue LLC. All rights reserved.
+    </div>
   </footer>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
   </script>
 
 </body>
