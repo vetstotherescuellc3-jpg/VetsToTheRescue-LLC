@@ -30,95 +30,360 @@
 
   <style>
     html{scroll-behavior:smooth}
-    body{font-family:Inter,ui-sans-serif,system-ui}
+    body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial}
     :root{
-      --bg0:#05070D;--bg1:#070A12;--panel:rgba(255,255,255,.05);
-      --line:rgba(255,255,255,.12);--text:#F3F6FF;--muted:rgba(243,246,255,.75);
-      --gold:#F6C453;--gold2:#E7A51A;
+      --bg0:#05070D;
+      --bg1:#070A12;
+      --panel:rgba(255,255,255,.05);
+      --line:rgba(255,255,255,.12);
+      --text:#F3F6FF;
+      --muted:rgba(243,246,255,.75);
+      --gold:#F6C453;
+      --gold2:#E7A51A;
+      --red:#FF3B30;
+      --blue:#2D7BFF;
     }
-    .glass{background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(12px)}
+
     .cardShadow{box-shadow:0 18px 50px rgba(0,0,0,.55)}
-    .btnPrimary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0B0D12}
-    .btnDark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:var(--text)}
-    .sparkLine{height:1px;background:linear-gradient(90deg,transparent,rgba(246,196,83,.6),transparent)}
+    .glass{background:var(--panel); border:1px solid var(--line); backdrop-filter: blur(12px);}
+    .btnPrimary{
+      background:linear-gradient(135deg,var(--gold),var(--gold2));
+      color:#0B0D12;
+      box-shadow:0 14px 32px rgba(246,196,83,.22);
+    }
+    .btnDark{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); color:var(--text);}
+    .sparkLine{height:1px;background:linear-gradient(90deg,transparent,rgba(246,196,83,.65),rgba(255,59,48,.35),rgba(45,123,255,.35),transparent);}
+    .textGlow{text-shadow:0 0 26px rgba(246,196,83,.18);}
+
+    header.siteHeader{
+      position:sticky;
+      top:0;
+      z-index:50;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background:rgba(5,7,13,.32);
+      backdrop-filter: blur(14px);
+    }
+    header .wrap{position:relative;}
+
+    /* Blog hero */
+    .blogHero{
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(246,196,83,.22), transparent 45%),
+        radial-gradient(circle at 80% 15%, rgba(45,123,255,.16), transparent 45%),
+        radial-gradient(circle at 70% 80%, rgba(255,59,48,.14), transparent 45%),
+        linear-gradient(180deg, rgba(5,7,13,.22), rgba(5,7,13,.72)),
+        url("/hero-truck.png");
+      background-size:auto,auto,auto,cover,cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    }
+    .blogHero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, rgba(5,7,13,.72) 0%, rgba(5,7,13,.45) 45%, rgba(5,7,13,.62) 100%);
+      pointer-events:none;
+    }
+
+    /* Featured image card */
+    .imgCard{
+      border-radius: 28px;
+      overflow:hidden;
+    }
+    .imgCard .shade{
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.72));
+    }
+
+    /* Post cards */
+    .postCard{
+      transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+    }
+    .postCard:hover{
+      transform: translateY(-4px);
+      opacity:.98;
+      box-shadow:
+        0 26px 80px rgba(0,0,0,.70),
+        0 0 0 1px rgba(255,255,255,.14),
+        0 0 42px rgba(246,196,83,.12);
+    }
+    .postImg{transition: transform .55s ease;}
+    .postCard:hover .postImg{transform: scale(1.06);}
+
+    /* Simple chips */
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+      font-weight:800;
+      font-size:.72rem;
+      letter-spacing:.02em;
+      border-radius:9999px;
+      padding:.35rem .7rem;
+      border:1px solid rgba(246,196,83,.25);
+      background:rgba(246,196,83,.12);
+      color:var(--gold);
+    }
   </style>
 </head>
 
-<body style="background:linear-gradient(180deg,var(--bg0),var(--bg1));color:var(--text);">
+<body class="min-h-screen" style="background:linear-gradient(180deg,var(--bg0),var(--bg1)); color:var(--text);">
 
-<header class="sticky top-0 z-40 border-b" style="background:rgba(5,7,13,.78);border-color:var(--line);backdrop-filter:blur(12px);">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-    <a href="/index.html" class="flex items-center gap-3">
-      <img src="/V2R_LOGO3.1.png" alt="VetsToTheRescue logo" class="h-11 w-auto rounded-xl bg-black/25 p-1 border" style="border-color:var(--line)" />
-      <div>
-        <p class="font-extrabold text-lg">VetsToTheRescue</p>
-        <p class="text-xs" style="color:var(--muted)">Veteran-Owned • Junk Removal & Hauling • Colorado</p>
+  <!-- Header -->
+  <header class="siteHeader">
+    <div class="wrap max-w-7xl mx-auto px-4 py-3">
+      <div class="flex items-center justify-between">
+        <a href="/index.html" class="flex items-center gap-3">
+          <img src="/V2R_LOGO3.1.png" alt="VetsToTheRescue logo" class="h-11 w-auto rounded-xl bg-black/25 p-1 border" style="border-color:var(--line)" />
+          <div class="leading-tight">
+            <p class="font-extrabold text-lg tracking-tight">VetsToTheRescue</p>
+            <p class="text-xs" style="color:var(--muted)">Junk Removal &amp; Hauling • Colorado</p>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="/#services" class="text-sm hover:opacity-90" style="color:var(--muted)">Services</a>
+          <a href="/#about" class="text-sm hover:opacity-90" style="color:var(--muted)">About</a>
+          <a href="/blog.html" class="text-sm hover:opacity-90 font-extrabold" style="color:var(--text)">Blog</a>
+          <a href="/#contact" class="text-sm hover:opacity-90" style="color:var(--muted)">Contact</a>
+          <a href="tel:+1-720-383-7488" class="inline-flex items-center gap-2 rounded-2xl px-4 py-2 btnPrimary font-extrabold">
+            📞 Call Now
+          </a>
+        </nav>
+
+        <a href="tel:+1-720-383-7488" class="md:hidden inline-flex items-center gap-2 rounded-2xl px-4 py-2 btnPrimary font-extrabold">
+          📞 Call
+        </a>
       </div>
-    </a>
-  </div>
-</header>
+    </div>
+  </header>
 
-<main class="max-w-7xl mx-auto px-4 py-14">
+  <!-- Hero -->
+  <section class="blogHero">
+    <div class="max-w-7xl mx-auto px-4 py-14 md:py-18 relative z-10">
+      <div class="max-w-3xl glass cardShadow rounded-[2rem] p-7 md:p-10">
+        <div class="chip">⭐ Tips, guides &amp; real job stories</div>
+        <h1 class="mt-5 text-4xl md:text-6xl font-black tracking-tight leading-[1.05] textGlow">
+          The VetsToTheRescue Blog
+        </h1>
+        <p class="mt-4 text-lg md:text-xl" style="color:var(--muted)">
+          Practical junk-removal guides + behind-the-scenes updates from a veteran-led crew building something real in Colorado.
+        </p>
 
-<section class="mb-10">
-  <h1 class="text-4xl font-black">The VetsToTheRescue Blog</h1>
-  <p class="mt-2 text-lg" style="color:var(--muted)">
-    Practical guides for cleanouts, pricing, and reclaiming your space across Colorado.
-  </p>
-</section>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="/#contact" class="rounded-2xl px-6 py-3 btnPrimary font-extrabold">Get a Free Estimate</a>
+          <a href="sms:+17203837488" class="rounded-2xl px-6 py-3 btnDark font-semibold">📲 Text Photos</a>
+          <a href="tel:+1-720-383-7488" class="rounded-2xl px-6 py-3 btnDark font-semibold">Call (720) 383-7488</a>
+        </div>
 
-<section>
-  <h2 class="text-2xl font-black mb-6">Latest Posts</h2>
+        <div class="mt-8 sparkLine"></div>
 
-  <div class="grid md:grid-cols-3 gap-6">
+        <div class="mt-5 grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+          <div class="flex items-center gap-2">🛡️ <span>Licensed &amp; Insured</span></div>
+          <div class="flex items-center gap-2">♻️ <span>Donation-First</span></div>
+          <div class="flex items-center gap-2">🏠 <span>Residential</span></div>
+          <div class="flex items-center gap-2">🏢 <span>Commercial</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <a href="/denver-junk-removal-vs-diy.html"
-       aria-label="Read Denver junk removal vs DIY"
-       class="block glass p-6 rounded-2xl cardShadow transition hover:opacity-95 hover:scale-[1.01]">
-      <p class="text-xs font-semibold" style="color:var(--muted)">Denver • 5 min read</p>
-      <h3 class="mt-2 text-lg font-black">Denver Junk Removal vs DIY</h3>
-      <p class="mt-2 text-sm" style="color:var(--muted)">
-        Why hiring a professional crew often saves time, money, and stress compared to doing it yourself.
-      </p>
-      <div class="mt-4 sparkLine"></div>
-    </a>
+  <main class="max-w-7xl mx-auto px-4 py-14">
 
-    <a href="/colorado-junk-removal-pricing-guide.html"
-       aria-label="Read Colorado junk removal pricing guide"
-       class="block glass p-6 rounded-2xl cardShadow transition hover:opacity-95 hover:scale-[1.01]">
-      <p class="text-xs font-semibold" style="color:var(--muted)">Colorado • 6 min read</p>
-      <h3 class="mt-2 text-lg font-black">Colorado Junk Removal Pricing Guide</h3>
-      <p class="mt-2 text-sm" style="color:var(--muted)">
-        Learn how volume, weight, access, and disposal fees affect junk removal costs in Colorado.
-      </p>
-      <div class="mt-4 sparkLine"></div>
-    </a>
+    <!-- Featured -->
+    <section class="mb-10">
+      <div class="grid lg:grid-cols-[1.35fr_.9fr] gap-6 items-stretch">
+        <a href="/posts/1969-chevy-c50-bringing-it-back-to-life.html"
+           class="imgCard glass cardShadow relative block postCard">
+          <img src="/1965_V2RWork_Truck.jpeg" alt="1969 Chevy C-50 grain truck restoration" class="postImg w-full h-[320px] md:h-[380px] object-cover" />
+          <div class="shade"></div>
+          <div class="absolute inset-x-0 bottom-0 p-6 md:p-7">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="chip">NEW</span>
+              <span class="text-xs font-semibold" style="color:rgba(243,246,255,.8)">Behind the scenes • 6–8 min read</span>
+            </div>
+            <h2 class="mt-3 text-2xl md:text-3xl font-black leading-tight">
+              Bringing a 1969 Chevy C-50 Grain Truck Back to Life (Our Future Workhorse)
+            </h2>
+            <p class="mt-2 text-sm md:text-base" style="color:rgba(243,246,255,.82)">
+              A real build story: brakes, fluids, safety, bed upgrades, and the mission behind restoring an old rig the right way.
+            </p>
+            <div class="mt-4 inline-flex items-center gap-2 rounded-2xl px-5 py-3 btnPrimary font-extrabold">
+              Read the story <span class="transition group-hover:translate-x-1">→</span>
+            </div>
+          </div>
+        </a>
 
-    <a href="/colorado-garage-cleanouts-guide.html"
-       aria-label="Read Colorado garage clean-out guide"
-       class="block glass p-6 rounded-2xl cardShadow transition hover:opacity-95 hover:scale-[1.01]">
-      <p class="text-xs font-semibold" style="color:var(--muted)">Colorado • 5 min read</p>
-      <h3 class="mt-2 text-lg font-black">Colorado Garage Clean-Outs</h3>
-      <p class="mt-2 text-sm" style="color:var(--muted)">
-        What to expect when you hire a veteran-owned crew to clean out your garage.
-      </p>
-      <div class="mt-4 sparkLine"></div>
-    </a>
+        <div class="glass cardShadow rounded-[2rem] p-6 md:p-8">
+          <h3 class="text-xl md:text-2xl font-black">What you’ll find here</h3>
+          <p class="mt-3" style="color:var(--muted)">
+            Clear guides for customers + honest updates about how we run VetsToTheRescue: donation-first cleanouts, pricing transparency,
+            and building reliable equipment for the job.
+          </p>
 
-  </div>
-</section>
+          <div class="mt-6 grid gap-3 text-sm">
+            <div class="glass rounded-2xl p-4">
+              <div class="font-extrabold">📌 Pricing &amp; what affects it</div>
+              <div class="mt-1" style="color:var(--muted)">Volume, weight, access, disposal fees—explained without fluff.</div>
+            </div>
+            <div class="glass rounded-2xl p-4">
+              <div class="font-extrabold">♻️ Donation-first disposal</div>
+              <div class="mt-1" style="color:var(--muted)">How we keep usable items out of the landfill.</div>
+            </div>
+            <div class="glass rounded-2xl p-4">
+              <div class="font-extrabold">🛠️ Behind-the-scenes builds</div>
+              <div class="mt-1" style="color:var(--muted)">The trucks, tools, and fixes that keep us fast and reliable.</div>
+            </div>
+          </div>
 
-</main>
+          <div class="mt-6 sparkLine"></div>
 
-<footer class="mt-16 border-t" style="border-color:var(--line)">
-  <div class="max-w-7xl mx-auto px-4 py-6 text-sm" style="color:var(--muted)">
-    © <span id="year"></span> VetsToTheRescue LLC. All rights reserved.
-  </div>
-</footer>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="/#contact" class="rounded-2xl px-5 py-3 btnPrimary font-extrabold">Request Estimate</a>
+            <a href="/clean-donate-recycle-landfill.html" class="rounded-2xl px-5 py-3 btnDark font-semibold">What makes us different</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+    <!-- Latest posts -->
+    <section>
+      <div class="flex items-end justify-between gap-4">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-black">Latest posts</h2>
+          <p class="mt-2" style="color:var(--muted)">New posts roll in as we build and haul across the Front Range.</p>
+        </div>
+      </div>
 
+      <div class="mt-7 grid md:grid-cols-3 gap-6">
+
+        <!-- New truck post -->
+        <a href="/posts/1969-chevy-c50-bringing-it-back-to-life.html"
+           class="postCard block glass rounded-2xl overflow-hidden cardShadow">
+          <div class="relative h-44">
+            <img src="/1965_V2RWork_Truck.jpeg" alt="1969 Chevy C-50 work truck" class="postImg w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent"></div>
+            <div class="absolute top-3 left-3 chip">NEW</div>
+          </div>
+          <div class="p-6">
+            <p class="text-xs font-semibold" style="color:var(--muted)">Behind the scenes • 6–8 min read</p>
+            <h3 class="mt-2 text-lg font-black">Restoring our 1969 Chevy C-50 (Workhorse Build)</h3>
+            <p class="mt-2 text-sm" style="color:var(--muted)">
+              A safety-first revival: brakes, leaks, tires, bed plans, and making an old truck dependable again.
+            </p>
+            <div class="mt-4 sparkLine"></div>
+            <div class="mt-4 inline-flex rounded-2xl px-4 py-2 btnPrimary font-extrabold">Read More →</div>
+          </div>
+        </a>
+
+        <!-- Existing posts -->
+        <a href="/denver-junk-removal-vs-diy.html"
+           aria-label="Read Denver junk removal vs DIY"
+           class="postCard block glass rounded-2xl overflow-hidden cardShadow">
+          <div class="relative h-44">
+            <img src="/donation-first-hero.png" alt="Junk removal vs DIY" class="postImg w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <p class="text-xs font-semibold" style="color:var(--muted)">Denver • 5 min read</p>
+            <h3 class="mt-2 text-lg font-black">Denver Junk Removal vs DIY</h3>
+            <p class="mt-2 text-sm" style="color:var(--muted)">
+              Why hiring a pro crew often saves time, money, and stress compared to doing it yourself.
+            </p>
+            <div class="mt-4 sparkLine"></div>
+            <div class="mt-4 inline-flex rounded-2xl px-4 py-2 btnDark font-semibold">Read More →</div>
+          </div>
+        </a>
+
+        <a href="/colorado-junk-removal-pricing-guide.html"
+           aria-label="Read Colorado junk removal pricing guide"
+           class="postCard block glass rounded-2xl overflow-hidden cardShadow">
+          <div class="relative h-44">
+            <img src="/blog-hauling-team.png" alt="Colorado junk removal pricing" class="postImg w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <p class="text-xs font-semibold" style="color:var(--muted)">Colorado • 6 min read</p>
+            <h3 class="mt-2 text-lg font-black">Colorado Junk Removal Pricing Guide</h3>
+            <p class="mt-2 text-sm" style="color:var(--muted)">
+              How volume, weight, access, and disposal fees affect junk removal costs in Colorado.
+            </p>
+            <div class="mt-4 sparkLine"></div>
+            <div class="mt-4 inline-flex rounded-2xl px-4 py-2 btnDark font-semibold">Read More →</div>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="mt-6 grid md:grid-cols-3 gap-6">
+        <a href="/colorado-garage-cleanouts-guide.html"
+           aria-label="Read Colorado garage clean-out guide"
+           class="postCard block glass rounded-2xl overflow-hidden cardShadow md:col-span-1">
+          <div class="relative h-44">
+            <img src="/blog-garage-cleanout.jpg" alt="Colorado garage cleanouts" class="postImg w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <p class="text-xs font-semibold" style="color:var(--muted)">Colorado • 5 min read</p>
+            <h3 class="mt-2 text-lg font-black">Colorado Garage Clean-Outs</h3>
+            <p class="mt-2 text-sm" style="color:var(--muted)">
+              What to expect when you hire a veteran-owned crew to clean out your garage.
+            </p>
+            <div class="mt-4 sparkLine"></div>
+            <div class="mt-4 inline-flex rounded-2xl px-4 py-2 btnDark font-semibold">Read More →</div>
+          </div>
+        </a>
+
+        <div class="glass cardShadow rounded-[2rem] p-6 md:p-7 md:col-span-2">
+          <h3 class="text-xl md:text-2xl font-black">Ready to reclaim your space?</h3>
+          <p class="mt-2" style="color:var(--muted)">
+            Tell us what you’ve got, your ZIP code, and whether there are stairs. Photos get you the fastest quote.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="/#contact" class="rounded-2xl px-6 py-3 btnPrimary font-extrabold">Get a Free Estimate</a>
+            <a href="sms:+17203837488" class="rounded-2xl px-6 py-3 btnDark font-semibold">📲 Text Photos</a>
+            <a href="tel:+1-720-383-7488" class="rounded-2xl px-6 py-3 btnDark font-semibold">Call Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="background:#04060B; border-top:1px solid var(--line);">
+    <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
+      <div>
+        <p class="font-black text-lg">VetsToTheRescue</p>
+        <p class="text-sm mt-1" style="color:var(--muted)">Veteran-Owned Junk Removal • Denver Metro &amp; Front Range</p>
+      </div>
+      <div>
+        <p class="font-extrabold">Quick Links</p>
+        <ul class="mt-2 space-y-2 text-sm" style="color:var(--muted)">
+          <li><a href="/#services" class="hover:underline">Services</a></li>
+          <li><a href="/#about" class="hover:underline">About</a></li>
+          <li><a href="/blog.html" class="hover:underline">Blog</a></li>
+          <li><a href="/#contact" class="hover:underline">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-extrabold">Business Info</p>
+        <ul class="mt-2 space-y-2 text-sm" style="color:var(--muted)">
+          <li class="flex items-center gap-2">📞 <a href="tel:+1-720-383-7488" class="hover:underline">(720) 383-7488</a></li>
+          <li class="flex items-center gap-2">✉️ <a href="mailto:inquiry@vetstotherescue.pro" class="hover:underline">inquiry@vetstotherescue.pro</a></li>
+          <li class="flex items-center gap-2">📍 Serving Denver &amp; surrounding Colorado communities</li>
+        </ul>
+      </div>
+    </div>
+    <div class="py-4 text-center text-xs" style="color:rgba(243,246,255,.55); border-top:1px solid var(--line);">
+      © <span id="year"></span> VetsToTheRescue LLC. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
