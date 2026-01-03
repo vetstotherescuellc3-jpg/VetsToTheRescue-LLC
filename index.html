@@ -99,7 +99,6 @@ html{scroll-behavior:smooth}
     @media (min-width:768px){
 
 }
-}
 
 /* Sticky nav logo badge that hangs down */
 .logoHang{
@@ -140,29 +139,6 @@ html{scroll-behavior:smooth}
 
 </style>
   <style>
-
-    /* Logo: attached to sticky nav, but hangs down */
-.logoHang{
-  position:absolute;      /* relative to the header container */
-  left:16px;
-  top:50%;                /* anchors to the nav bar vertically */
-  transform: translateY(-50%) translateY(18px); /* and hangs down */
-  z-index:80;
-}
-
-.logoHang img{
-  width:92px;             /* bigger but not insane */
-  height:auto;
-  filter:
-    drop-shadow(0 12px 34px rgba(0,0,0,.70))
-    drop-shadow(0 0 16px rgba(246,196,83,.30));
-}
-
-/* Mobile tweak */
-@media (max-width:640px){
-  .logoHang img{ width:70px; }
-  .logoHang{ transform: translateY(-50%) translateY(12px); left:12px; }
-}
 
 /* =========================
    FULL-BLEED HERO BACKGROUND
@@ -728,12 +704,7 @@ header { position: relative; }
     </div>
   </footer>
 
-  <script>
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Contact form success handling + auto reset (same behavior as your original)
-<script>
+ <script>
   // Footer year (safe)
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -751,6 +722,7 @@ header { position: relative; }
         submitBtn.disabled = true;
         submitBtn.textContent = "Sending…";
       }
+
       try {
         const response = await fetch(form.action, {
           method: form.method || "POST",
@@ -781,49 +753,47 @@ header { position: relative; }
       }
     });
   }
-</script>
-    }
 
-    // Scroll reveal
-    const revealEls = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window) {
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('reveal-visible');
-        });
-      }, { threshold: 0.18 });
-      revealEls.forEach(el => revealObserver.observe(el));
-    } else {
-      revealEls.forEach(el => el.classList.add('reveal-visible'));
-    }
-
-    // Active nav highlight
-    const sectionIds = ['services', 'about', 'contact'];
-    const navLinks = Array.from(document.querySelectorAll('nav a[data-nav]'));
-    if ('IntersectionObserver' in window) {
-      const navObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            navLinks.forEach(link => {
-              if (link.dataset.nav === id) {
-                link.classList.add('font-extrabold');
-                link.style.color = 'var(--text)';
-              } else {
-                link.classList.remove('font-extrabold');
-                link.style.color = 'var(--muted)';
-              }
-            });
-          }
-        });
-      }, { threshold: 0.4 });
-
-      sectionIds.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) navObserver.observe(el);
+  // Scroll reveal
+  const revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("reveal-visible");
       });
-    }
-  </script>
+    }, { threshold: 0.18 });
+    revealEls.forEach((el) => revealObserver.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add("reveal-visible"));
+  }
+
+  // Active nav highlight
+  const sectionIds = ["services", "about", "contact"];
+  const navLinks = Array.from(document.querySelectorAll("nav a[data-nav]"));
+  if ("IntersectionObserver" in window) {
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach((link) => {
+            if (link.dataset.nav === id) {
+              link.classList.add("font-extrabold");
+              link.style.color = "var(--text)";
+            } else {
+              link.classList.remove("font-extrabold");
+              link.style.color = "var(--muted)";
+            }
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) navObserver.observe(el);
+    });
+  }
+</script>
 
   <!-- ZIP -> City/State autofill (same logic as your original) -->
   <script>
