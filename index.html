@@ -218,12 +218,12 @@ header { position: relative; }
   background:
     linear-gradient(
       90deg,
-      rgba(5,7,13,.90) 0%,
-      rgba(5,7,13,.65) 44%,
-      rgba(5,7,13,.35) 72%,
-      rgba(5,7,13,.85) 100%
+      rgba(5,7,13,.70) 0%,
+      rgba(5,7,13,.45) 44%,
+      rgba(5,7,13,.22) 72%,
+      rgba(5,7,13,.65) 100%
     ),
-    radial-gradient(circle at 70% 40%, rgba(0,0,0,.15), rgba(0,0,0,.70));
+    radial-gradient(circle at 70% 40%, rgba(0,0,0,.10), rgba(0,0,0,.45));
   pointer-events:none;
 }
 
@@ -650,12 +650,21 @@ header { position: relative; }
 
           <div>
             <label class="text-sm font-semibold" for="zip" style="color:var(--muted)">Job ZIP Code</label>
-            <input id="zip" name="zip" required inputmode="numeric" pattern="\\d{5}" maxlength="5" placeholder="80013"
+            <input
+              id="zip"
+              name="zip"
+              type="text"
+              required
+              inputmode="numeric"
+              autocomplete="postal-code"
+              pattern="[0-9]{5}"
+              minlength="5"
+              maxlength="5"
+              placeholder="80013"
               class="mt-1 w-full rounded-xl px-3 py-2 outline-none border"
               style="background:rgba(0,0,0,.25); border-color:var(--line); color:var(--text);"
-            />
+              />
           </div>
-
           <div>
             <label class="text-sm font-semibold" for="city_state" style="color:var(--muted)">City/State (Auto-filled)</label>
             <input id="city_state" name="city_state" readonly placeholder="Auto-fills from ZIP"
@@ -805,7 +814,7 @@ header { position: relative; }
       }
 
       zipEl.addEventListener("input", async () => {
-        const zip = zipEl.value.replace(/\\D/g, "").slice(0, 5);
+        const zip = zipEl.value.replace(/\D/g, "").slice(0, 5);
         zipEl.value = zip;
 
         if (zip.length !== 5) {
